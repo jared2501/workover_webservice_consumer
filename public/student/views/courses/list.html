@@ -1,0 +1,48 @@
+<div class="row-fluid quick-actions">
+	<div class="span2">
+		<a href="#/courses/list" class="quick-action">
+		<span class="icon home"></span>
+			Home
+		</a>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box">
+			<div class="box-title">
+				My Courses
+			</div>
+			<div class="box-content nopadding">
+
+				<table class="table table-bordered table-striped items-table">
+					<tbody>
+						<tr ng-repeat="course in courses">
+							<td>
+								<a ng-href="#/questions/{{course.id}}/list">{{course.code}}</a>
+							</td>
+							<td>
+								<span truncate="{{course.description}}" truncate-length="100"></span>
+							</td>
+						</tr>
+
+						<tr ng-show="courses != null && courses.length < 1">
+							<td colspan="2">
+								<p class="alert">You have not been assigned any courses!</p>
+							</td>
+						</tr>
+
+						<tr ng-show="courses == null">
+							<td colspan="2">
+								<p class="alert">Loading...</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+

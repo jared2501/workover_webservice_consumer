@@ -1,0 +1,110 @@
+<div class="row-fluid quick-actions">
+	<div class="span2">
+		<a href="#/students/list" class="quick-action">
+		<span class="icon users"></span>
+			My Students
+		</a>
+	</div>
+	<div class="span2">
+		<a href="#/students/add" class="quick-action">
+			<span class="icon user_add"></span>
+			Add
+		</a>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span9">
+		<div class="box">
+			<div class="box-title">
+				<ul class="nav nav-tabs">
+					<li class="active"><a id="upload-students-done" href="#tab1" data-toggle="tab">Add Students</a></li>
+					<li class=""><a href="#tab2" data-toggle="tab">Upload Students</a></li>
+				</ul>
+			</div>
+			<div class="box-content tab-content">
+				<div class="tab-pane active" id="tab1" style="margin-top: 10px;">
+
+					<form class="form-inline pull-left" ng-submit="updateNumStudents()">
+						<label class="control-label" for="inputNumStudents"><strong>Number of Students:</strong></label>
+						<input id="inputNumStudents" type="number" style="width: 60px;" ng-model="numStudents">
+
+						<button type="submit" class="btn">Update</button>
+					</form>
+
+					<div class="pull-right" style="margin-bottom: 18px; margin-top: 10px;">
+						<a class="btn btn-success" ng-show="!doneUploading" ng-click="addStudents()">Add Students</a>
+						<a class="btn btn-primary" ng-show="!!doneUploading" ng-click="resetStudents()">Add more</a>
+						<a class="btn btn-success" ng-show="!!doneUploading" ng-click="goBack()">Im Finished.</a>
+					</div>
+
+
+					<table class="table table-striped items-table">
+						<thead>
+							<tr>
+								<th>&nbsp;</th>
+								<th>Username</th>
+								<th>Password</th>
+								<th>Email</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="student in students" ng-class="{success: student.success == true, error: student.success == false}">
+								<td>{{$index + 1}}</td>
+								<td>
+									<input ng-show="!student.success" ng-model="student.username" class="input-block-level"></input>
+									<span ng-show="!!student.success">{{student.username}}</span>
+								</td>
+								<td>
+									<input ng-show="!student.success" ng-model="student.password" class="input-block-level"></input>
+									<span ng-show="!!student.success">{{student.password}}</span>
+								</td>
+								<td>
+									<input ng-show="!student.success" ng-model="student.email" class="input-block-level"></input>
+									<span ng-show="!!student.success">{{student.email}}</span>
+								</td>
+								<td>
+									<input ng-show="!student.success" ng-model="student.first_name" class="input-block-level"></input>
+									<span ng-show="!!student.success">{{student.first_name}}</span>
+								</td>
+								<td>
+									<input ng-show="!student.success" ng-model="student.last_name" class="input-block-level"></input>
+									<span ng-show="!!student.success">{{student.last_name}}</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="tab-pane" id="tab2">
+					<p>You can upload a CSV list of students you wish to add to this course. All new students will also have new accounts created. A few points to consider:</p>
+					<ul>
+						<li>New students added to the course will also be added to the system, and accounts created.</li>
+						<li>Existing students will be added to the paper using their existing accounts.</li>
+						<li>Download the template CSV below, fill it out, and re-upload it.</li>
+					</ul>
+
+					<a href="downloads/student_list_upload.csv" class="btn btn-warning" style="margin-bottom: 10px;">Download CSV Template</a>
+
+					<div fine-uploader success="fileUploaded"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="span3">
+		<div class="box">
+			<div class="box-title">
+				<span>Course Selector</span>
+			</div>
+			<div class="box-content course-selector">
+
+				<div course-selector></div>
+
+				<p style="margin-bottom:">Select the course you wish to view above.</p>
+			</div>
+		</div>
+	</div>
+</div>

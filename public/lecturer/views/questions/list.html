@@ -1,0 +1,93 @@
+<div class="row-fluid quick-actions">
+	<div class="span2">
+		<a href="#/questions/list" class="quick-action">
+		<span class="icon notes"></span>
+			My Questions
+		</a>
+	</div>
+	<div class="span2">
+		<a href="#/questions/add" class="quick-action">
+			<span class="icon file"></span>
+			Add
+		</a>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span9">
+		<div class="box">
+			<div class="box-title">
+				<span>Questions for {{course.code}}</span>
+			</div>
+			<div class="box-content nopadding">
+
+				<table class="table table-bordered table-striped items-table">
+					<tbody>
+						<tr>
+							<td class="center checkbox-cell"><input class="check_all" type="checkbox" checkbox-model-all="questions" disable-actions="actions.disable"/></td>
+							<td>
+								<div class="table-actions">
+									<strong>Actions:</strong>
+									<a href="" ng-class="{disabled: actions.disable}" ng-click="remove()">
+										<i class="icon-trash"></i> remove
+									</a>									
+								</div>
+
+								<div class="table-search">
+									<i class="icon-search"></i>
+									<input type="text" placeholder="search questions..." ng-model="serachText"></input>
+								</div>
+							</td>
+						</tr>
+
+						<tr ng-repeat="question in questions | filter:serachText">
+							<td class="center checkbox-cell">
+								<input type="checkbox" checkbox-model="question.selected" ng-model="serachText"/>
+							</td>
+							<td>
+								<a ng-href="#/questions/{{question.id}}" class="title">{{question.title}}</a>
+								<p class="tags">
+									<i class="icon-tags"></i>
+									<span class="label label-info" ng-repeat="tag in question.tags">
+										{{tag}}
+										<a href="" del-tag="question.tags" tag-name="tag" question-id="question.id">&times;</a>
+									</span>
+									<span class="add-tag" add-tag="question.tags" question-id="question.id"></span>
+								</p>
+							</td>
+						</tr>
+						
+						<tr ng-show="questions != null && questions.length < 1">
+							<td colspan="2">
+								<p class="alert">You have not added any questions to this course yet! <a href="#/questions/add">Click here</a> to add some.</p>
+							</td>
+						</tr>
+						
+						<tr ng-show="questions == null">
+							<td colspan="2">
+								<p class="alert">Loading...</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="span3">
+		<div class="box">
+			<div class="box-title">
+				<span>Course Selector</span>
+			</div>
+			<div class="box-content course-selector">
+
+				<div course-selector></div>
+
+				<p style="margin-bottom:">Select the course you wish to view above.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
